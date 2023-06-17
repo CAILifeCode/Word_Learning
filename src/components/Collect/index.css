@@ -1,0 +1,4 @@
+.collect-word-card {
+    background: var(--color-canvas-subtle);
+    border: var(--borderWidth-thin, 1px) solid var(--color-border-default) !important;
+}
