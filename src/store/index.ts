@@ -22,3 +22,5 @@ export const gpt_model = atom(
         setModel(model)
     }
 )
+
+export const isEscapeKey = atom(false)

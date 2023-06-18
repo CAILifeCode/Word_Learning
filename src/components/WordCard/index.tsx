@@ -5,6 +5,7 @@ import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import WorkMarkdown from '@/components/WordMarkdown'
 import './index.css'
 import Loader from '@/components/Loader'
+import useOnKeyboardEvent from '@/hooks/useOnKeyboardEvent'
 
 type Props = {
     isShowCollect: boolean
@@ -17,27 +18,17 @@ type Props = {
 }
 const WordCard = (props: Props) => {
     const { onCloseWordCard, isShowCollect, isCollect, onCollectWorld, wordDefinition, isLoading, onSpeakWord } = props
-
+    const { isEscape } = useOnKeyboardEvent()
     const collect_start_variants = {
         show: { opacity: 1 },
         hide: { opacity: 0 },
     }
 
-    function onMonitorEscapeKey(e: KeyboardEvent) {
-        console.log(e.key, isLoading)
-
-        if (!isLoading && e.key === 'Escape') {
+    useEffect(() => {
+        if (isEscape && !isLoading) {
             onCloseWordCard()
         }
-    }
-
-    useEffect(() => {
-        window.addEventListener('keydown', onMonitorEscapeKey)
-
-        return () => {
-            window.removeEventListener('keydown', onMonitorEscapeKey)
-        }
-    }, [isLoading])
+    }, [isEscape, isLoading])
 
     return (
         <div className='fixed top-0 left-0 w-screen h-screen backdrop-blur-sm z-[200]'>
@@ -56,20 +47,12 @@ const WordCard = (props: Props) => {
                                         <XCircle size={24} color='#ffffff' />
                                     </motion.div>
                                 )}
-                                {!isLoading && (
-                                    <motion.div
-                                        onClick={onSpeakWord}
-                                        whileHover={{ scale: 1 }}
-                                        initial={{ scale: 0.95 }}
-                                        className='mr-2'
-                                    >
-                                        <Volume2 size={24} color='white' />
-                                    </motion.div>
-                                )}
+
                                 <motion.div
                                     variants={collect_start_variants}
                                     animate={isShowCollect ? 'show' : 'hide'}
                                     initial={false}
+                                    className='mr-2'
                                 >
                                     <Star
                                         size={24}
@@ -78,6 +61,15 @@ const WordCard = (props: Props) => {
                                         onClick={onCollectWorld}
                                     />
                                 </motion.div>
+                                {!isLoading && (
+                                    <motion.div
+                                        onClick={onSpeakWord}
+                                        whileHover={{ scale: 1 }}
+                                        initial={{ scale: 0.95 }}
+                                    >
+                                        <Volume2 size={24} color='white' />
+                                    </motion.div>
+                                )}
                             </div>
                         </CardTitle>
                         {isLoading && (

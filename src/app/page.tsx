@@ -14,6 +14,7 @@ import { useToast } from '@/components/ui/use-toast'
 import Help from '@/components/Help'
 import { motion } from 'framer-motion'
 import voiceService from '@/utils/voiceService'
+import useOnKeyboardEvent from '@/hooks/useOnKeyboardEvent'
 
 const Home = () => {
     const [searchWord, setSearchWord] = useState('')
@@ -26,6 +27,7 @@ const Home = () => {
     const [isLoading, setIsLoading] = useState(false)
     const [isWordStreaming, setIsWordStreaming] = useState(false)
     const { toast } = useToast()
+    const { setIsEscape } = useOnKeyboardEvent()
 
     function onWordStream(word: string) {
         setIsLoading(false)
@@ -93,6 +95,7 @@ const Home = () => {
         setIsCollect(false)
         setWordDefinition('')
         setIsShowCard(false)
+        setIsEscape(false)
     }
 
     function handleSpeakWord() {
