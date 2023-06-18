@@ -33,3 +33,11 @@
     @apply mb-2 text-sm text-[#7d8590];
     line-height: 2;
 }
+
+.logo-text {
+    background: -webkit-linear-gradient(0deg, #a371f7, #a5d6ff, #aff5b4);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-box-decoration-break: clone;
+}

@@ -12,6 +12,7 @@ import WordCard from '@/components/WordCard'
 import Setting from '@/components/Setting'
 import { useToast } from '@/components/ui/use-toast'
 import Help from '@/components/Help'
+import { motion } from 'framer-motion'
 
 const Home = () => {
     const [searchWord, setSearchWord] = useState('')
@@ -94,30 +95,43 @@ const Home = () => {
     }
 
     return (
-        <div className='container h-screen w-screen flex flex-col items-center justify-center'>
-            <Sidebar />
-            <WordInput
-                onWordStream={onWordStream}
-                onWordCompleted={onWordCompleted}
-                onGetWord={onGetWord}
-                onShowWordCard={onShowWordCard}
-                onWordIsInLocalCompleted={onWordIsInLocalCompleted}
-            />
-            {isShowCard && (
-                <WordCard
-                    isLoading={isLoading}
-                    isCollect={isCollect}
-                    isShowCollect={isShowCollect}
-                    wordDefinition={wordDefinition}
-                    onCloseWordCard={handleCloseWordCard}
-                    onCollectWorld={handleCollectWord}
-                ></WordCard>
-            )}
+        <>
+            <div className='container h-screen w-screen flex flex-col items-center justify-center lg:flex sm:hidden'>
+                <Sidebar />
+                <WordInput
+                    onWordStream={onWordStream}
+                    onWordCompleted={onWordCompleted}
+                    onGetWord={onGetWord}
+                    onShowWordCard={onShowWordCard}
+                    onWordIsInLocalCompleted={onWordIsInLocalCompleted}
+                />
+                {isShowCard && (
+                    <WordCard
+                        isLoading={isLoading}
+                        isCollect={isCollect}
+                        isShowCollect={isShowCollect}
+                        wordDefinition={wordDefinition}
+                        onCloseWordCard={handleCloseWordCard}
+                        onCollectWorld={handleCollectWord}
+                    ></WordCard>
+                )}
 
-            <Setting />
-            <Help />
-            <Toaster></Toaster>
-        </div>
+                <Setting />
+                <Help />
+                <Toaster></Toaster>
+            </div>
+            <motion.div
+                className='sm:flex flex-col h-screen w-screen items-center justify-center lg:hidden'
+                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+            >
+                <div className='logo-text font-bold text-[36px]'>
+                    Word Learning
+                    <span className='text-sm'>(mobile)</span>
+                </div>
+                <span className='text-white text-[16px]'>Not Coming Soon</span>
+            </motion.div>
+        </>
     )
 }
 export default Home
