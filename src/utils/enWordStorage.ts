@@ -1,4 +1,4 @@
-import { EN_WORD_STORE } from '../constants'
+import { EN_WORD_STORE } from '@/constants'
 import { ENWordStorageType, ENWord } from '@/types'
 import { getLocal, setLocal } from '@/utils/storage'
 

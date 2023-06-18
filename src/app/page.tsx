@@ -13,6 +13,7 @@ import Setting from '@/components/Setting'
 import { useToast } from '@/components/ui/use-toast'
 import Help from '@/components/Help'
 import { motion } from 'framer-motion'
+import voiceService from '@/utils/voiceService'
 
 const Home = () => {
     const [searchWord, setSearchWord] = useState('')
@@ -94,6 +95,12 @@ const Home = () => {
         setIsShowCard(false)
     }
 
+    function handleSpeakWord() {
+        const voiceWord = voiceService as SpeechSynthesisUtterance
+        voiceWord.text = searchWord
+        speechSynthesis.speak(voiceWord)
+    }
+
     return (
         <>
             <div className='container h-screen w-screen flex flex-col items-center justify-center lg:flex sm:hidden'>
@@ -113,6 +120,7 @@ const Home = () => {
                         wordDefinition={wordDefinition}
                         onCloseWordCard={handleCloseWordCard}
                         onCollectWorld={handleCollectWord}
+                        onSpeakWord={handleSpeakWord}
                     ></WordCard>
                 )}
 

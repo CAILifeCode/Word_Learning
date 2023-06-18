@@ -12,6 +12,7 @@ import { useToast } from '@/components/ui/use-toast'
 import Link from 'next/link'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useOnCollectList } from '@/hooks/useOnCollectList'
+import voiceService from '@/utils/voiceService'
 
 const Sidebar = () => {
     const [isWider, setIsWider] = useState(false)
@@ -87,6 +88,12 @@ const Sidebar = () => {
         const cleanedLines = extractedLines.map((line) => line.replace(/^### /, ''))
 
         return cleanedLines.join('\n')
+    }
+
+    function handleSpeakWord() {
+        const voiceWord = voiceService as SpeechSynthesisUtterance
+        voiceWord.text = collectWord
+        speechSynthesis.speak(voiceWord)
     }
 
     return (
@@ -196,6 +203,7 @@ const Sidebar = () => {
                         isShowCollect={true}
                         isCollect={true}
                         onCollectWorld={onCollectWord}
+                        onSpeakWord={handleSpeakWord}
                         wordDefinition={getCurrentWordContent()}
                     />
                 )}

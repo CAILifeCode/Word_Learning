@@ -1,5 +1,5 @@
 import { getLocal, setLocal } from '@/utils/storage'
-import { API_KEY, DEFAULT_MODEL, PROXY_URL } from '../constants'
+import { API_KEY, DEFAULT_MODEL, PROXY_URL } from '@/constants'
 import { ModelType } from '@/types'
 
 export function getAPIKey(): string {
