@@ -18,7 +18,7 @@
 }
 
 .download--btn:hover {
-    box-shadow: 0 10px 30px rgba(231, 146, 136, 0.22)
+    box-shadow: 0 10px 30px rgba(231, 146, 136, 0.22);
 }
 
 .logo-text {
@@ -30,5 +30,5 @@
 }
 
 .side-btn {
-    border: var(--borderWidth-thin, 1px) solid var(--color-border-default) !important
+    border: var(--borderWidth-thin, 1px) solid var(--color-border-default) !important;
 }

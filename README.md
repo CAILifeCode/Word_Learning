@@ -1,8 +1,8 @@
-<p align="center" style="font-size: 24px; font-weight:bold">英文单词学习本(WEB)</p>
+<p align="center" style="font-size: 24px; font-weight:bold">English Word Learning Book (Web)</p>
 <p align="center">
-<em>产品灵感来源于 <a href="https://github.com/openai-translator/openai-translator">openai-translator</a> 生词本</em></p>
-<p align="center"><em>Prompt 灵感来源于 <a href="https://twitter.com/vista8">vista8</a></em></p>
-<p align="center"><em>配色来源于 <a href="https://github.com/features/preview/copilot-x">Copilot X</a></em></p>
+<em>The product is inspired by the <a href="https://github.com/openai-translator/openai-translator">openai-translator</a> vocabulary book.</em></p>
+<p align="center"><em>Prompt is inspired by <a href="https://twitter.com/vista8">vista8</a></em></p>
+<p align="center"><em>Color matching comes from <a href="https://github.com/features/preview/copilot-x">Copilot X</a></em></p>
 
 <p align="center">
  <img alt="TypeScript" src="https://img.shields.io/badge/-TypeScript-blue?style=flat-square&logo=typescript&logoColor=white">
@@ -11,64 +11,69 @@
 
 </p>
 
-## 截图
+<p align="center"> 
+English | <a href="README_CN.md">中文</a>
+</p>
+
+## Screenshot
 
 <img alt="preview" src="./public/preview.png" width="768">
 
-## 特性
+## Features
 
-1. 浏览器本地数据保存（纯前端功能，无后端服务，除了翻译走 OpenAI API）
-2. 支持导出收集的单词本（CSV格式）
-3. 单词学习包含多个场景 `单词释义` `场景例句` `相似词` `英文故事` `小测验及答案`
+1. Browser local data storage (pure front-end function, no back-end service, except for translation using OpenAI API)
+2. Support exporting collected word books (in CSV format)
+3. Word learning includes multiple scenarios: `word definition`, `scenario example sentences`, `similar words`, `English stories`, `quizzes and answers`.
 
-## 使用准备
+## Preparation
 
-- （必须）申请 [OpenAI API Key](https://platform.openai.com/account/api-keys)
-- （可选）如果无法访问 OpenAI，可以使用 OpenAI API Proxy
-- （备注）帮助中心提供了相关视频教程
+-   (Mandatory) Apply for an [OpenAI API Key](https://platform.openai.com/account/api-keys)
+-   (Optional) If you cannot access `OpenAI`, you can use the `OpenAI API Proxy`.
+-   (Note) The [help center](https://imcai.notion.site/Learning-Words-211888d2bd1b4c2d9ae964e486691e33?pvs=4) provides related video tutorials.
 
-## 安装
+## Installation
 
 ```bash
-# 安装依赖
+# Install dependencies
 pnpm install
 
-# 启动开发环境
+# Start development environment
 pnpm dev
 ```
 
-本地开发运行在 `3012` 端口，想要修改的可以去 `package.json` 中更改 `dev` 命令
+The local development runs on port `3012`. If you want to modify it, you can go to `package.json` and change the dev command.
 
 ```json
 {
-  "scripts": {
-    "dev": "next dev -p [port]"
-  }
+    "scripts": {
+        "dev": "next dev -p [port]"
+    }
 }
 ```
 
-## 额外的配制
+## Additional Configuration
 
-- 如果你需要用到 [Umami](https://github.com/umami-software/umami)，需要配制环境变量
+-   If you need to use [Umami](https://github.com/umami-software/umami)，you need to configure environment variables.
 
 ```bash
-ANALYZE_WEBSITE_URL= URL 地址
+ANALYZE_WEBSITE_URL= URL address
 
-DATA_WEBSITE_ID= URL 统计ID
+DATA_WEBSITE_ID= URL statistics ID
 ```
 
-- 如果你不需要，可以在 `layout.tsx` 中删除以下相关代码
+-   If not needed，delete the following related code in `layout.tsx`
 
 ```typescript jsx
-  <script async src={process.env.ANALYZE_WEBSITE_URL} data-website-id={process.env.DATA_WEBSITE_ID}></script>
+<script async src={process.env.ANALYZE_WEBSITE_URL} data-website-id={process.env.DATA_WEBSITE_ID}></script>
 ```
 
 ## License
 
 [LICENSE](./LICENSE)
 
-## 群组
+## Group
 
-<a target="_blank" href="https://t.me/+6Rm32SFK9VdiMjM1">加入 Telegram 群组</a>
+<a target="_blank" href="https://t.me/+6Rm32SFK9VdiMjM1">Join our Telegram group</a>
+
 <p></p>
 <img src="./public/QR_CODE.png" width="220" height="220" alt="Telegram 群组" />

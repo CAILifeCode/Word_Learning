@@ -53,7 +53,7 @@
 
         --borderWidth-thin: max(1px, 0.0625rem);
 
-        --toast-success: #5069C3;
+        --toast-success: #5069c3;
 
         --toast-error: #ff4c00;
 
@@ -113,5 +113,4 @@
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
     }
-
 }

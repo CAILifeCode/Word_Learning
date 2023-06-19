@@ -134,7 +134,7 @@ const Home = () => {
                 initial={{ opacity: 0, scale: 0.95 }}
             >
                 <div className='logo-text font-bold text-[36px]'>
-                    Word Learning
+                    Learning Words
                     <span className='text-sm'>(mobile)</span>
                 </div>
                 <span className='text-white text-[16px]'>Not Coming Soon</span>
