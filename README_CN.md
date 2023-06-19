@@ -1,4 +1,4 @@
-<p align="center" style="font-size: 24px; font-weight:bold">英文单词学习本(WEB)</p>
+<h3 align="center">英文单词学习本 (Web) </h3>
 <p align="center">
 <em>产品灵感来源于 <a href="https://github.com/openai-translator/openai-translator">openai-translator</a> 生词本</em></p>
 <p align="center"><em>Prompt 灵感来源于 <a href="https://twitter.com/vista8">vista8</a></em></p>
@@ -16,7 +16,7 @@
 
 ## 截图
 
-<img alt="preview" src="./public/preview.png" width="768">
+<img alt="preview" src="./public/preview.jpeg" width="768">
 
 ## 特性
 

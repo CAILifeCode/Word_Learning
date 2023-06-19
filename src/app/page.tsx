@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import WordInput from '@/components/WordInput'
 import { Toaster } from '@/components/ui/toaster'
-import './page.css'
+import '../styles/page.css'
 import Sidebar from '@/components/Sidebar'
 import { addEnWordStore, getEnWordStore, removeEnWordStore } from '@/utils/enWordStorage'
 import { useSetAtom } from 'jotai'

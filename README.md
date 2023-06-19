@@ -1,4 +1,4 @@
-<p align="center" style="font-size: 24px; font-weight:bold">English Word Learning Book (Web)</p>
+<h3 align="center">English Word Learning Book (Web)</h3>
 <p align="center">
 <em>The product is inspired by the <a href="https://github.com/openai-translator/openai-translator">openai-translator</a> vocabulary book.</em></p>
 <p align="center"><em>Prompt is inspired by <a href="https://twitter.com/vista8">vista8</a></em></p>
@@ -17,7 +17,7 @@ English | <a href="README_CN.md">中文</a>
 
 ## Screenshot
 
-<img alt="preview" src="./public/preview.png" width="768">
+<img alt="preview" src="./public/preview.jpeg" width="768">
 
 ## Features
 
