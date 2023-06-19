@@ -6,10 +6,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 
 const Help = () => {
     return (
-        <Link
-            href='https://puzzled-archduke-ed0.notion.site/Word-Learning-211888d2bd1b4c2d9ae964e486691e33?pvs=4'
-            target='_blank'
-        >
+        <Link href='https://imcai.notion.site/imcai/Word-Learning-211888d2bd1b4c2d9ae964e486691e33' target='_blank'>
             <TooltipProvider>
                 <Tooltip>
                     <TooltipTrigger asChild>
@@ -21,7 +18,7 @@ const Help = () => {
                             <HelpCircle size={24} color='#ffffff' />
                         </motion.div>
                     </TooltipTrigger>
-                    <TooltipContent className="z-[300]">
+                    <TooltipContent className='z-[300]'>
                         <p>前往帮助文档</p>
                     </TooltipContent>
                 </Tooltip>

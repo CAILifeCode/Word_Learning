@@ -1,15 +1,12 @@
 'use client'
-import { isEscapeKey } from '@/store'
-import { useAtomValue, useSetAtom } from 'jotai'
 import { useEffect } from 'react'
 
-export default function useOnKeyboardEvent() {
-    const isEscape = useAtomValue(isEscapeKey)
-    const setIsEscape = useSetAtom(isEscapeKey)
+type Key = 'ctrl' | string
 
+export function useOnKeyboardEvent(keys: Key[], callback: () => void) {
     function onKeydownEvent(e: KeyboardEvent) {
-        if (e.key === 'Escape') {
-            setIsEscape(true)
+        if (keys.every((key) => (key === 'ctrl' && e.ctrlKey) || e.key.toLowerCase() === key)) {
+            callback()
         }
     }
 
@@ -19,7 +16,5 @@ export default function useOnKeyboardEvent() {
         return () => {
             window.removeEventListener('keydown', onKeydownEvent)
         }
-    }, [isEscape])
-
-    return { isEscape, setIsEscape }
+    }, [keys, callback])
 }

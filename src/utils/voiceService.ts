@@ -9,10 +9,9 @@ class VoiceService {
             VoiceService.instance = new window.SpeechSynthesisUtterance()
         }
 
-        VoiceService.instance.rate = 0.85
-        window.speechSynthesis.onvoiceschanged = () => {
-            VoiceService.instance!.voice = window.speechSynthesis.getVoices()[112]
-        }
+        VoiceService.instance.rate = 0.8
+        VoiceService.instance.pitch = 1.2
+
         return VoiceService.instance
     }
 }

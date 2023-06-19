@@ -215,7 +215,7 @@ const Sidebar = () => {
                         fontSize: isWider ? '24px' : '80px',
                     }}
                 >
-                    WORD
+                    WORDS
                 </motion.div>
                 <motion.div
                     className='logo-text absolute font-bold bottom-[120px] left-[80px]'

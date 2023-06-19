@@ -8,6 +8,7 @@ import chatService from '@/utils/chatService'
 import { ALL_SETTINGS_EMPTY_ERROR, API_KEY_EMPTY_ERROR, PROXY_URL_EMPTY_ERROR } from '../../constants'
 import { getEnWordStore } from '@/utils/enWordStorage'
 import { getAPIKey, getProxyUrl } from '@/utils/settingStorage'
+import { useOnKeyboardEvent } from '@/hooks/useOnKeyboardEvent'
 
 type Props = {
     onShowWordCard: () => void
@@ -52,6 +53,11 @@ const WordInput = (props: Props) => {
             setLoading(false)
         },
     }
+
+    useOnKeyboardEvent(['ctrl', 'f'], () => {
+        if (!wordInput.current) return
+        wordInput.current.focus()
+    })
 
     useEffect(() => {
         if (!wordInput.current) return
