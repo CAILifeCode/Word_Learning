@@ -104,7 +104,12 @@ const Setting = () => {
             <PopoverContent className='w-80 z-[100]' align='end' sideOffset={5}>
                 <div className='grid gap-4'>
                     <div className='space-y-2'>
-                        <h4 className='font-medium leading-none'>设置</h4>
+                        <h4 className='font-medium leading-none relative'>
+                            设置
+                            <span className='absolute flex right-0 top-1/2 -translate-y-1/2 text-[12px] text-slate-600'>
+                                <Asterisk size={12} color='red' /> 请按回车键确认输入
+                            </span>
+                        </h4>
                     </div>
                     <div className='grid gap-2'>
                         <div className='grid grid-cols-2 items-center gap-3'>

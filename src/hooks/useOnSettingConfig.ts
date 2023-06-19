@@ -1,4 +1,4 @@
-import { useAtom } from 'jotai/index'
+import { useAtom } from 'jotai'
 import { api_key, gpt_model, proxy_url } from '@/store'
 
 export default function useOnSettingConfig() {
