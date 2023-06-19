@@ -16,7 +16,7 @@
 
 ## 截图
 
-<img alt="preview" src="./public/preview.png" width="768">
+<img alt="preview" src="./public/preview.jpeg" width="768">
 
 ## 特性
 

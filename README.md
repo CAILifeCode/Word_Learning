@@ -17,7 +17,7 @@ English | <a href="README_CN.md">中文</a>
 
 ## Screenshot
 
-<img alt="preview" src="./public/preview.png" width="768">
+<img alt="preview" src="./public/preview.jpeg" width="768">
 
 ## Features
 
