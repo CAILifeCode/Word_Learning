@@ -96,6 +96,14 @@ const Sidebar = () => {
         speechSynthesis.speak(voiceWord)
     }
 
+    async function handleCopyWordContent() {
+        await navigator.clipboard.writeText(getCurrentWordContent().replace(/###/g, ''))
+        toast({
+            description: '复制成功',
+            className: 'bg-green-500 text-white border-0',
+        })
+    }
+
     return (
         <motion.div
             initial={{ width: '120px', position: 'fixed', left: 0, top: 0 }}
@@ -204,6 +212,7 @@ const Sidebar = () => {
                         isCollect={true}
                         onCollectWorld={onCollectWord}
                         onSpeakWord={handleSpeakWord}
+                        onCopyWordContent={handleCopyWordContent}
                         wordDefinition={getCurrentWordContent()}
                     />
                 )}

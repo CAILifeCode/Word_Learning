@@ -1,6 +1,6 @@
 import React from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Star, Volume2, XCircle } from 'lucide-react'
+import { Star, Volume2, XCircle, Clipboard } from 'lucide-react'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
 import WorkMarkdown from '@/components/WordMarkdown'
 import './index.css'
@@ -16,10 +16,20 @@ type Props = {
     wordDefinition: string
     onCollectWorld: () => void
     onCloseWordCard: () => void
+    onCopyWordContent: () => void
     onSpeakWord: () => void
 }
 const WordCard = (props: Props) => {
-    const { onCloseWordCard, isShowCollect, isCollect, onCollectWorld, wordDefinition, isLoading, onSpeakWord } = props
+    const {
+        onCloseWordCard,
+        isShowCollect,
+        isCollect,
+        onCollectWorld,
+        wordDefinition,
+        isLoading,
+        onSpeakWord,
+        onCopyWordContent,
+    } = props
     const collect_start_variants = {
         show: { opacity: 1 },
         hide: { opacity: 0 },
@@ -56,7 +66,7 @@ const WordCard = (props: Props) => {
                                             <Tooltip>
                                                 <TooltipTrigger asChild>
                                                     <Star
-                                                        size={24}
+                                                        size={22}
                                                         color={isCollect ? 'yellow' : 'white'}
                                                         fill={isCollect ? 'yellow' : 'transparent'}
                                                         onClick={onCollectWorld}
@@ -68,6 +78,23 @@ const WordCard = (props: Props) => {
                                             </Tooltip>
                                         </TooltipProvider>
                                     </motion.div>
+                                    {isShowCollect && (
+                                        <motion.div
+                                            className='mr-2'
+                                            onClick={onCopyWordContent}
+                                        >
+                                            <TooltipProvider>
+                                                <Tooltip>
+                                                    <TooltipTrigger asChild>
+                                                        <Clipboard size={22} color='white' />
+                                                    </TooltipTrigger>
+                                                    <TooltipContent side='bottom' sideOffset={5}>
+                                                        <p>复制到剪切板</p>
+                                                    </TooltipContent>
+                                                </Tooltip>
+                                            </TooltipProvider>
+                                        </motion.div>
+                                    )}
                                     {!isLoading && (
                                         <motion.div
                                             onClick={onSpeakWord}

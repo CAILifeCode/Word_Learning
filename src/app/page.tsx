@@ -101,6 +101,14 @@ const Home = () => {
         speechSynthesis.speak(voiceWord)
     }
 
+    async function handleCopyWordContent() {
+        await navigator.clipboard.writeText(wordDefinition.replace(/###/g, ''))
+        toast({
+            description: '复制成功',
+            className: 'bg-green-500 text-white border-0',
+        })
+    }
+
     return (
         <>
             <div className='container h-screen w-screen flex flex-col items-center justify-center lg:flex sm:hidden'>
@@ -121,6 +129,7 @@ const Home = () => {
                         onCloseWordCard={handleCloseWordCard}
                         onCollectWorld={handleCollectWord}
                         onSpeakWord={handleSpeakWord}
+                        onCopyWordContent={handleCopyWordContent}
                     ></WordCard>
                 )}
 
