@@ -1,0 +1,10 @@
+.side-menu__bar {
+    /*background: var(--peach-gradient);*/
+}
+
+.menu {
+}
+
+.menu:hover {
+    background: var(--peach-gradient);
+}

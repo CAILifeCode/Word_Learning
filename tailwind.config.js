@@ -56,6 +56,7 @@ module.exports = {
                 'toast-success': 'var(--toast-success)',
                 'toast-warning': 'var(--toast-warning)',
                 'toast-error': 'var(--toast-error)',
+                'button-primary': 'var(--button-primary)'
             },
             borderRadius: {
                 lg: `var(--radius)`,
