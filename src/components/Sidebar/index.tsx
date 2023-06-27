@@ -20,15 +20,17 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { reviewConfig } from '@/config'
 
 const Sidebar = () => {
+    const { wordNumber } = reviewConfig
+
     const [isWider, setIsWider] = useState(false)
     const [isShowWordCard, setIsShowWordCard] = useState(false)
     const [collectWord, setCollectWord] = useState('')
     const [isDisableDownload, setIsDisableDownload] = useState(false)
     const [isShowCollectWord, setIsShowCollectWord] = useState(true)
     const { collectList, setCollectList } = useOnCollectList()
+    const [reviewWordNumber, setReviewWordNumber] = useState('10')
 
     const { toast } = useToast()
-    const { wordNumber } = reviewConfig
     const open_btn_variants = {
         open: { left: 'calc(100vw - 150px)' },
         close: { left: '90px' },
@@ -122,6 +124,10 @@ const Sidebar = () => {
         if (menu === 'word') {
             setIsShowCollectWord(true)
         }
+    }
+
+    function handleReviewWordNumber(wordNumber: string) {
+        setReviewWordNumber(wordNumber)
     }
 
     return (
@@ -224,7 +230,7 @@ const Sidebar = () => {
 
                 {isWider && !isShowCollectWord && (
                     <div className='absolute top-0 right-0 w-[calc(100%-80px)] h-full flex items-center justify-center text-white'>
-                        <Review />
+                        <Review wordNumber={reviewWordNumber} />
                     </div>
                 )}
 
@@ -236,8 +242,8 @@ const Sidebar = () => {
 
                 {isWider && !isShowCollectWord && (
                     <div className='absolute top-[28px] right-[12px] flex items-center justify-center'>
-                        <Select defaultValue='10'>
-                            <SelectTrigger className='w-[60px] focus:ring-0 focus:ring-offset-0 p-2 h-[30px] border-none bg-button-primary text-black' >
+                        <Select defaultValue='10' onValueChange={handleReviewWordNumber}>
+                            <SelectTrigger className='w-[60px] focus:ring-0 focus:ring-offset-0 p-2 h-[30px] border-none bg-button-primary text-black'>
                                 <SelectValue placeholder='选择复习单词数量' />
                             </SelectTrigger>
                             <SelectContent className='z-[300]'>

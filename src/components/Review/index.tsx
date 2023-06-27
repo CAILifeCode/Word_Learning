@@ -1,15 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
-import { reviewConfig } from '@/config'
 import { getEnWordStore } from '@/utils/enWordStorage'
 import { ENWord } from '@/types'
 import { useToast } from '@/components/ui/use-toast'
 import { AnimatePresence, motion } from 'framer-motion'
 import './index.css'
 
-const Review = () => {
-    const { wordNumber } = reviewConfig
+type Props = {
+    wordNumber: string
+}
+
+const Review = (props: Props) => {
+    const { wordNumber } = props
     const { toast } = useToast()
     const [isStarted, setIsStarted] = useState(false)
     const [reviewList, setReviewList] = useState<ENWord[]>([]) // [word, word, word
@@ -31,7 +34,7 @@ const Review = () => {
 
     function getReviewWordsList() {
         const list = getEnWordStore()
-        setReviewList(shuffleArray(list.slice(0, wordNumber)))
+        setReviewList(shuffleArray(list.slice(0, Number(wordNumber) > list.length ? list.length : Number(wordNumber))))
     }
 
     function shuffleArray(array: ENWord[]) {
@@ -42,7 +45,24 @@ const Review = () => {
         return array
     }
 
+    function extractChineseDefinition(text: string): string {
+        const startMarker = '中文释义'
+        const endMarker = '英文释义'
+        const startIndex = text.indexOf(startMarker) + startMarker.length
+        const endIndex = text.indexOf(endMarker)
+
+        if (startIndex > -1 && endIndex > -1) {
+            return text
+                .slice(startIndex, endIndex)
+                .trim()
+                .replace(/(:|[：\s/]|-)/g, ' ')
+        } else {
+            return '未找到匹配的文本'
+        }
+    }
+
     function getWordChineseDefinition() {
+        return extractChineseDefinition(reviewList[listIndex].content)
         return reviewList[listIndex].content.match(/中文释义：\s?([\s\S]+?)(?=- 英文释义：|$)/)![1].replace(/-/g, ' ')
     }
 
@@ -150,4 +170,5 @@ const Review = () => {
         </>
     )
 }
+
 export default Review
