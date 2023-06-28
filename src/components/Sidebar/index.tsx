@@ -272,6 +272,7 @@ const Sidebar = () => {
                             onCloseWordCard={() => {
                                 setIsShowWordCard(false)
                             }}
+                            isNotFoundWord={false}
                             isLoading={false}
                             isShowCollect={true}
                             isCollect={true}
