@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Star, Volume2, XCircle, Clipboard } from 'lucide-react'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
@@ -13,12 +13,14 @@ type Props = {
     isShowCollect: boolean
     isCollect: boolean
     isLoading: boolean
+    isNotFoundWord: boolean
     wordDefinition: string
     onCollectWorld: () => void
     onCloseWordCard: () => void
     onCopyWordContent: () => void
     onSpeakWord: () => void
 }
+
 const WordCard = (props: Props) => {
     const {
         onCloseWordCard,
@@ -29,6 +31,7 @@ const WordCard = (props: Props) => {
         isLoading,
         onSpeakWord,
         onCopyWordContent,
+        isNotFoundWord,
     } = props
 
     const collect_start_variants = {
@@ -54,11 +57,10 @@ const WordCard = (props: Props) => {
                                     <XCircle size={24} color='#ffffff' />
                                 </motion.div>
                             )}
-
                             <div className='flex'>
                                 <motion.div
                                     variants={collect_start_variants}
-                                    animate={isShowCollect ? 'show' : 'hide'}
+                                    animate={isShowCollect && !isNotFoundWord ? 'show' : 'hide'}
                                     initial={false}
                                     className='mr-2'
                                 >
@@ -78,7 +80,7 @@ const WordCard = (props: Props) => {
                                         </Tooltip>
                                     </TooltipProvider>
                                 </motion.div>
-                                {isShowCollect && (
+                                {isShowCollect && !isNotFoundWord && (
                                     <motion.div className='mr-2' onClick={onCopyWordContent}>
                                         <TooltipProvider>
                                             <Tooltip>
@@ -92,7 +94,7 @@ const WordCard = (props: Props) => {
                                         </TooltipProvider>
                                     </motion.div>
                                 )}
-                                {!isLoading && (
+                                {!isLoading && !isNotFoundWord && (
                                     <motion.div
                                         onClick={onSpeakWord}
                                         whileHover={{ scale: 1 }}
