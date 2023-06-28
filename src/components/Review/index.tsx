@@ -6,16 +6,18 @@ import { ENWord } from '@/types'
 import { useToast } from '@/components/ui/use-toast'
 import { AnimatePresence, motion } from 'framer-motion'
 import './index.css'
+import { useOnKeyboardEvent } from '@/hooks/useOnKeyboardEvent'
 
 type Props = {
     wordNumber: string
+    onReviewWord: () => void
 }
 
 const Review = (props: Props) => {
-    const { wordNumber } = props
+    const { wordNumber, onReviewWord } = props
     const { toast } = useToast()
     const [isStarted, setIsStarted] = useState(false)
-    const [reviewList, setReviewList] = useState<ENWord[]>([]) // [word, word, word
+    const [reviewList, setReviewList] = useState<ENWord[]>([])
     const [listIndex, setListIndex] = useState(0)
     const [inputWord, setInputWord] = useState('')
     const [isShowNextBtn, setIsShowNextBtn] = useState(false)
@@ -34,15 +36,18 @@ const Review = (props: Props) => {
 
     function getReviewWordsList() {
         const list = getEnWordStore()
-        setReviewList(shuffleArray(list.slice(0, Number(wordNumber) > list.length ? list.length : Number(wordNumber))))
+        const len = Number(wordNumber) > list.length ? list.length : Number(wordNumber)
+        setReviewList(shuffleArray(list, len))
     }
 
-    function shuffleArray(array: ENWord[]) {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1))
-            ;[array[i], array[j]] = [array[j], array[i]]
+    function shuffleArray(arr: ENWord[], len: number) {
+        let shuffledArray = arr.slice()
+        for (let i = arr.length - 1; i > 0; i--) {
+            let j = Math.floor(Math.random() * (i + 1))
+            ;[shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]
         }
-        return array
+
+        return shuffledArray.slice(0, len)
     }
 
     function extractChineseDefinition(text: string): string {
@@ -63,10 +68,10 @@ const Review = (props: Props) => {
 
     function getWordChineseDefinition() {
         return extractChineseDefinition(reviewList[listIndex].content)
-        return reviewList[listIndex].content.match(/中文释义：\s?([\s\S]+?)(?=- 英文释义：|$)/)![1].replace(/-/g, ' ')
     }
 
     function onStartReview() {
+        onReviewWord()
         setIsStarted(true)
     }
 
@@ -125,6 +130,11 @@ const Review = (props: Props) => {
             className: 'bg-toast-error text-white border-0',
         })
     }, [errorCount])
+
+    useOnKeyboardEvent(['ctrl', 'p'], () => {
+        if (!isShowNextBtn) return
+        handleChooseNextWord()
+    })
 
     return (
         <>

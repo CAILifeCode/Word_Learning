@@ -27,10 +27,11 @@ const Sidebar = () => {
     const [collectWord, setCollectWord] = useState('')
     const [isDisableDownload, setIsDisableDownload] = useState(false)
     const [isShowCollectWord, setIsShowCollectWord] = useState(true)
-    const { collectList, setCollectList } = useOnCollectList()
     const [reviewWordNumber, setReviewWordNumber] = useState('10')
-
+    const [isStartReviewWord, setIsStartReviewWord] = useState(false)
+    const { collectList, setCollectList } = useOnCollectList()
     const { toast } = useToast()
+
     const open_btn_variants = {
         open: { left: 'calc(100vw - 150px)' },
         close: { left: '90px' },
@@ -62,6 +63,10 @@ const Sidebar = () => {
         if (isWider) {
             setIsShowCollectWord(true)
         }
+        if (!isWider) {
+            setIsStartReviewWord(false)
+        }
+
         setIsWider(!isWider)
     }
 
@@ -123,11 +128,16 @@ const Sidebar = () => {
 
         if (menu === 'word') {
             setIsShowCollectWord(true)
+            setIsStartReviewWord(false)
         }
     }
 
     function handleReviewWordNumber(wordNumber: string) {
         setReviewWordNumber(wordNumber)
+    }
+
+    function handleStartReviewWord() {
+        setIsStartReviewWord(true)
     }
 
     return (
@@ -230,7 +240,7 @@ const Sidebar = () => {
 
                 {isWider && !isShowCollectWord && (
                     <div className='absolute top-0 right-0 w-[calc(100%-80px)] h-full flex items-center justify-center text-white'>
-                        <Review wordNumber={reviewWordNumber} />
+                        <Review wordNumber={reviewWordNumber} onReviewWord={handleStartReviewWord} />
                     </div>
                 )}
 
@@ -240,7 +250,7 @@ const Sidebar = () => {
                     </div>
                 )}
 
-                {isWider && !isShowCollectWord && (
+                {isWider && !isShowCollectWord && !isStartReviewWord && (
                     <div className='absolute top-[28px] right-[12px] flex items-center justify-center'>
                         <Select defaultValue='10' onValueChange={handleReviewWordNumber}>
                             <SelectTrigger className='w-[60px] focus:ring-0 focus:ring-offset-0 p-2 h-[30px] border-none bg-button-primary text-black'>
@@ -262,6 +272,7 @@ const Sidebar = () => {
                             onCloseWordCard={() => {
                                 setIsShowWordCard(false)
                             }}
+                            isNotFoundWord={false}
                             isLoading={false}
                             isShowCollect={true}
                             isCollect={true}

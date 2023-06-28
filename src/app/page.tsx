@@ -12,6 +12,7 @@ import WordCard from '@/components/WordCard'
 import Setting from '@/components/Setting'
 import { useToast } from '@/components/ui/use-toast'
 import Help from '@/components/Help'
+import Notice from '@/components/Notice'
 import { motion } from 'framer-motion'
 import voiceService from '@/utils/voiceService'
 
@@ -25,6 +26,8 @@ const Home = () => {
     const setCollectList = useSetAtom(collectWordCardList)
     const [isLoading, setIsLoading] = useState(false)
     const [isWordStreaming, setIsWordStreaming] = useState(false)
+    const [isNotFoundWord, setIsNotFoundWord] = useState(false)
+
     const { toast } = useToast()
 
     function onWordStream(word: string) {
@@ -40,6 +43,11 @@ const Home = () => {
         } else {
             setIsShowCollect(true)
         }
+
+        if (wordDefinition.includes('未找到该单词')) {
+            setIsNotFoundWord(true)
+        }
+
         setIsWordStreaming(false)
     }
 
@@ -91,8 +99,9 @@ const Home = () => {
 
         setIsShowCollect(false)
         setIsCollect(false)
-        setWordDefinition('')
         setIsShowCard(false)
+        setIsNotFoundWord(false)
+        setWordDefinition('')
     }
 
     function handleSpeakWord() {
@@ -102,7 +111,7 @@ const Home = () => {
     }
 
     async function handleCopyWordContent() {
-        await navigator.clipboard.writeText(wordDefinition.replace(/###/g, ''))
+        await navigator.clipboard.writeText(wordDefinition.replace(/[###|-]/g, ''))
         toast({
             description: '复制成功',
             className: 'bg-green-500 text-white border-0',
@@ -125,6 +134,7 @@ const Home = () => {
                         isLoading={isLoading}
                         isCollect={isCollect}
                         isShowCollect={isShowCollect}
+                        isNotFoundWord={isNotFoundWord}
                         wordDefinition={wordDefinition}
                         onCloseWordCard={handleCloseWordCard}
                         onCollectWorld={handleCollectWord}
@@ -132,7 +142,7 @@ const Home = () => {
                         onCopyWordContent={handleCopyWordContent}
                     ></WordCard>
                 )}
-
+                <Notice />
                 <Setting />
                 <Help />
                 <Toaster></Toaster>
