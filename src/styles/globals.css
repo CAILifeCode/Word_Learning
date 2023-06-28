@@ -43,6 +43,7 @@
 
         --color-canvas-default: #010409;
         --color-canvas-subtle: #0d1117;
+
         --color-border-default: #232930;
 
         --mktg-accent-primary: #a77bf3;
@@ -58,7 +59,10 @@
         --toast-error: #ff4c00;
 
         --toast-warning: #ffb700;
+
+        --button-primary: #fecb4d;
     }
+
 
     .dark {
         --background: 224 71% 4%;

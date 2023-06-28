@@ -13,15 +13,25 @@ import Link from 'next/link'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useOnCollectList } from '@/hooks/useOnCollectList'
 import voiceService from '@/utils/voiceService'
+import SideMenuBar from '@/components/SideMenuBar'
+import Review from '@/components/Review'
+import { AnimatePresence } from 'framer-motion'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { reviewConfig } from '@/config'
 
 const Sidebar = () => {
+    const { wordNumber } = reviewConfig
+
     const [isWider, setIsWider] = useState(false)
     const [isShowWordCard, setIsShowWordCard] = useState(false)
     const [collectWord, setCollectWord] = useState('')
     const [isDisableDownload, setIsDisableDownload] = useState(false)
+    const [isShowCollectWord, setIsShowCollectWord] = useState(true)
+    const [reviewWordNumber, setReviewWordNumber] = useState('10')
+    const [isStartReviewWord, setIsStartReviewWord] = useState(false)
     const { collectList, setCollectList } = useOnCollectList()
-
     const { toast } = useToast()
+
     const open_btn_variants = {
         open: { left: 'calc(100vw - 150px)' },
         close: { left: '90px' },
@@ -50,6 +60,13 @@ const Sidebar = () => {
     }
 
     function changeSidebarWidth() {
+        if (isWider) {
+            setIsShowCollectWord(true)
+        }
+        if (!isWider) {
+            setIsStartReviewWord(false)
+        }
+
         setIsWider(!isWider)
     }
 
@@ -94,6 +111,33 @@ const Sidebar = () => {
         const voiceWord = voiceService as SpeechSynthesisUtterance
         voiceWord.text = collectWord
         speechSynthesis.speak(voiceWord)
+    }
+
+    async function handleCopyWordContent() {
+        await navigator.clipboard.writeText(getCurrentWordContent().replace(/###/g, ''))
+        toast({
+            description: '复制成功',
+            className: 'bg-green-500 text-white border-0',
+        })
+    }
+
+    function handleSwitchMenu(menu: string) {
+        if (menu === 'review') {
+            setIsShowCollectWord(false)
+        }
+
+        if (menu === 'word') {
+            setIsShowCollectWord(true)
+            setIsStartReviewWord(false)
+        }
+    }
+
+    function handleReviewWordNumber(wordNumber: string) {
+        setReviewWordNumber(wordNumber)
+    }
+
+    function handleStartReviewWord() {
+        setIsStartReviewWord(true)
     }
 
     return (
@@ -172,7 +216,7 @@ const Sidebar = () => {
                     </motion.div>
                 </motion.div>
 
-                {isWider && (
+                {isShowCollectWord && isWider && (
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{
@@ -181,7 +225,7 @@ const Sidebar = () => {
                                 delay: 0.3,
                             },
                         }}
-                        className='collect-container absolute top-0 right-0 w-[calc(100%-80px)] h-full flex flex-wrap gap-4 p-10 content-start overflow-y-auto'
+                        className='collect-container absolute top-[53px] right-0 w-[calc(100%-80px)] h-full flex flex-wrap gap-4 p-10 content-start overflow-y-auto'
                     >
                         <Collect
                             cardList={collectList}
@@ -194,19 +238,50 @@ const Sidebar = () => {
                     </motion.div>
                 )}
 
-                {isShowWordCard && (
-                    <WordCard
-                        onCloseWordCard={() => {
-                            setIsShowWordCard(false)
-                        }}
-                        isLoading={false}
-                        isShowCollect={true}
-                        isCollect={true}
-                        onCollectWorld={onCollectWord}
-                        onSpeakWord={handleSpeakWord}
-                        wordDefinition={getCurrentWordContent()}
-                    />
+                {isWider && !isShowCollectWord && (
+                    <div className='absolute top-0 right-0 w-[calc(100%-80px)] h-full flex items-center justify-center text-white'>
+                        <Review wordNumber={reviewWordNumber} onReviewWord={handleStartReviewWord} />
+                    </div>
                 )}
+
+                {isWider && (
+                    <div className='w-[calc(100%-80px)]  absolute top-[24px] right-0 flex items-center justify-center'>
+                        <SideMenuBar switchMenu={handleSwitchMenu} />
+                    </div>
+                )}
+
+                {isWider && !isShowCollectWord && !isStartReviewWord && (
+                    <div className='absolute top-[28px] right-[12px] flex items-center justify-center'>
+                        <Select defaultValue='10' onValueChange={handleReviewWordNumber}>
+                            <SelectTrigger className='w-[60px] focus:ring-0 focus:ring-offset-0 p-2 h-[30px] border-none bg-button-primary text-black'>
+                                <SelectValue placeholder='选择复习单词数量' />
+                            </SelectTrigger>
+                            <SelectContent className='z-[300]'>
+                                {wordNumber.map((number) => (
+                                    <SelectItem value={number} key={number}>
+                                        {number}
+                                    </SelectItem>
+                                ))}
+                            </SelectContent>
+                        </Select>
+                    </div>
+                )}
+                <AnimatePresence>
+                    {isShowWordCard && (
+                        <WordCard
+                            onCloseWordCard={() => {
+                                setIsShowWordCard(false)
+                            }}
+                            isLoading={false}
+                            isShowCollect={true}
+                            isCollect={true}
+                            onCollectWorld={onCollectWord}
+                            onSpeakWord={handleSpeakWord}
+                            onCopyWordContent={handleCopyWordContent}
+                            wordDefinition={getCurrentWordContent()}
+                        />
+                    )}
+                </AnimatePresence>
 
                 <motion.div
                     className='logo-text absolute font-bold bottom-[20px] left-[10px]'
