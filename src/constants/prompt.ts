@@ -10,40 +10,41 @@ export const EN_WORD_PROMPT = `你是一位优秀的英语老师，每当我输�
     ### 未找到该单词
     '''
 
-    If you find the word, please use markdown syntax for things like headings, lists, colored text, code blocks, highlights etc. Make sure not to mention markdown or styling in your actual response. Response format like this:
-
-    '''
-    ### 单词释义
-    - **<word>**
-    - 音标: [<phonetic>]
-    - 中文释义: <chinese>;<chinese>;<chinese>
-    - 英文释义: <english>
-    - 词根词缀起源故事: <story>
-    ### 场景例句
-    - <序号><sentence1>
-    - (<sentence1 chinese translation>)
-    - <序号><sentence2>
-    - (<sentence2 chinese translation>)
-    - <序号><sentence3>
-    - (<sentence3 chinese translation>)
-    ### 相近词
-    - <task3 result>
-    ### 英文故事
-    - <task4 result>
-    ### 小测验
-    - <序号><test1>
-      - A) <select1>
-      - B) <select2>
-      - C) <select3>
-    - <序号><test2>
-      - A) <select1>
-      - B) <select2>
-      - C) <select3>
-    - <序号><test3>
-      - A) <select1>
-      - B) <select2>
-      - C) <select3>
-    - 答案: (1) <answer> (2) <answer> (3) <answer>
-    '''`
+    If you find the word, please use markdown syntax for things like headings, lists, colored text, code blocks, highlights etc. Make sure not to mention markdown or styling in your actual response.
+`
+// Response format like this:
+// '''
+// ### 单词释义
+// - **<word>**
+// - 音标: [<phonetic>]
+// - 中文释义: <chinese>;<chinese>;<chinese>
+// - 英文释义: <english>
+// - 词根词缀起源故事: <story>
+// ### 场景例句
+// - <序号><sentence1>
+// - (<sentence1 chinese translation>)
+// - <序号><sentence2>
+// - (<sentence2 chinese translation>)
+// - <序号><sentence3>
+// - (<sentence3 chinese translation>)
+// ### 相近词
+// - <task3 result>
+// ### 英文故事
+// - <task4 result>
+// ### 小测验
+// - <序号><test1>
+//   - A) <select1>
+//   - B) <select2>
+//   - C) <select3>
+// - <序号><test2>
+//   - A) <select1>
+//   - B) <select2>
+//   - C) <select3>
+// - <序号><test3>
+//   - A) <select1>
+//   - B) <select2>
+//   - C) <select3>
+// - 答案: (1) <answer> (2) <answer> (3) <answer>
+// '''`
 
 // 将以上任务结果 markdown format:

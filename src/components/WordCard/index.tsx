@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Star, Volume2, XCircle, Clipboard } from 'lucide-react'
 import { Card, CardContent, CardTitle } from '@/components/ui/card'
-import WorkMarkdown from '@/components/WordMarkdown'
+// import WorkMarkdown from '@/components/WordMarkdown'
 import './index.css'
 import Loader from '@/components/Loader'
 import { useOnKeyboardEvent } from '@/hooks/useOnKeyboardEvent'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import Markdown from '@/components/Markdown'
 
 type Props = {
     isShowCollect: boolean
@@ -116,7 +117,9 @@ const WordCard = (props: Props) => {
                     {!isLoading && (
                         <CardContent className='word-card__content'>
                             <ScrollArea className='h-[520px]'>
-                                <WorkMarkdown>{wordDefinition}</WorkMarkdown>
+                                {/* <WorkMarkdown>{wordDefinition}</WorkMarkdown>
+                                 */}
+                                <Markdown markdownText={wordDefinition}></Markdown>
                             </ScrollArea>
                         </CardContent>
                     )}
